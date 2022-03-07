@@ -26,6 +26,8 @@ public class NonPlayerCharacter : MonoBehaviour
             infoText.SetActive(true);
             if(Input.GetKeyDown(KeyCode.K))
             {
+                
+                other.gameObject.GetComponent<Player>().dialogNumber = 1;
                 dialogText.SetActive(true);
             }
         }
