@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[SerializeField]
+[System.Serializable]
 public class DialogObject
 {
     public string[] dialogs;
@@ -14,11 +14,12 @@ public class DialogObject
 }
 public class DialogObjects : MonoBehaviour
 {
-    private Player player;
+    public Player player;
     public TMP_Text nameTextBox;
     public TMP_Text dialogTextBox;
     public int currentDialogNumber = 0;
     private DialogObject currentDialog = null;
+    public NonPlayerCharacter npc;
     [Header("Dialog Objects")]
     public DialogObject dialog1;
     private void OnEnable()
@@ -42,11 +43,12 @@ public class DialogObjects : MonoBehaviour
         nameTextBox.text = tempDialogs.charcterNames;
         if(currentDialogNumber<tempDialogs.dialogs.Length)
         {
-            dialogTextBox.text = tempDialogs.dialogs[0];
+            dialogTextBox.text = tempDialogs.dialogs[currentDialogNumber];
         }
         else
         {
-            //end the dialog 
+            npc.dialogText.SetActive(false);
+            currentDialogNumber = 0;
         }
        
     }
@@ -64,7 +66,7 @@ public class DialogObjects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<Player>(); 
+        //player = FindObjectOfType<Player>(); 
     }
 
     // Update is called once per frame
